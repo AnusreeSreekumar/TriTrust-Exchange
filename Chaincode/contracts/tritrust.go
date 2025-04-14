@@ -41,7 +41,7 @@ func (tc *TrustChaincode) AccountExists(ctx contractapi.TransactionContextInterf
 func (tc *TrustChaincode) CreateAccount(ctx contractapi.TransactionContextInterface,
 	accountID string, customerName string, age int, address string, balance float64, accountType string, createdByBank string, insuranceEligible bool) (string, error) {
 
-	clientOrgId, err := ctx.GetClientIdentity().GetMspID()
+	clientOrgId, err := ctx.GetClientIdentity().GetMSPID()
 	if err != nil {
 		return "", err
 	}
@@ -100,7 +100,7 @@ func (tc *TrustChaincode) ReadAccount(ctx contractapi.TransactionContextInterfac
 func (tc *TrustChaincode) UpdateAccount(ctx contractapi.TransactionContextInterface,
 	accountId string, address string, balance string, insuranceEligible bool, policyNumber string, coverageAmount float64, insuranceOrg string) (string, error) {
 
-	clientOrgId, err := ctx.GetClientIdentity().GetMspID()
+	clientOrgId, err := ctx.GetClientIdentity().GetMSPID()
 	if err != nil {
 		return "", err	
 	}
