@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Network Up"
-minifab netup -s couchdb -e true -i 2.4.8 -o bank.org.com
+minifab netup -s couchdb -e true -i 2.4.8 -o bank.fin.com
 
 sleep 5
 

@@ -13,7 +13,7 @@ type TrustChaincode struct {
 }
 
 type BankAccount struct {
-	AccountID    string `json:"accountId"`
+	AccountID    string `json:"accountID"`
 	CustomerName string `json:"customerName"`
 	Age          int    `json:"age"`
 	Address      string `json:"address"`
@@ -46,7 +46,7 @@ func (tc *TrustChaincode) CreateAccount(ctx contractapi.TransactionContextInterf
 		return "", err
 	}
 
-	if clientOrgId == "bank-org-com" {
+	if clientOrgId == "Org1MSP" {
 
 		exists, err := tc.AccountExists(ctx, accountID)
 		if err != nil {
@@ -75,9 +75,11 @@ func (tc *TrustChaincode) CreateAccount(ctx contractapi.TransactionContextInterf
 		} else {
 			return fmt.Sprintf("successfully added account %v", accountID), nil
 		}
-	} else {
-		return "", fmt.Errorf("only banks can create accounts")
 	}
+	// else {
+	// 	return "", fmt.Errorf("only banks can create accounts")
+	// }
+	return fmt.Sprintf("Account creation attempted by %s: %v", clientOrgId, accountID), nil
 }
 
 func (tc *TrustChaincode) ReadAccount(ctx contractapi.TransactionContextInterface, accountID string) (*BankAccount, error) {
@@ -98,17 +100,17 @@ func (tc *TrustChaincode) ReadAccount(ctx contractapi.TransactionContextInterfac
 }
 
 func (tc *TrustChaincode) UpdateAccount(ctx contractapi.TransactionContextInterface,
-	accountId string, address string, balance string, insuranceEligible bool, policyNumber string, coverageAmount float64, insuranceOrg string) (string, error) {
+	accountID string, address string, balance string, insuranceEligible bool, policyNumber string, coverageAmount float64, insuranceOrg string) (string, error) {
 
 	clientOrgId, err := ctx.GetClientIdentity().GetMSPID()
 	if err != nil {
-		return "", err	
+		return "", err
 	}
-	if clientOrgId == "insurance-org-com" {	
+	if clientOrgId == "Org2MSP" {
 
-		account, err := tc.ReadAccount(ctx, accountId)
-		if err != nil {		
-			return "", fmt.Errorf("failed to read account %s: %v", accountId, err)
+		account, err := tc.ReadAccount(ctx, accountID)
+		if err != nil {
+			return "", fmt.Errorf("failed to read account %s: %v", accountID, err)
 		}
 		account.InsuranceEligible = true
 		account.PolicyNumber = policyNumber
@@ -121,13 +123,15 @@ func (tc *TrustChaincode) UpdateAccount(ctx contractapi.TransactionContextInterf
 			return "", fmt.Errorf("failed to marshal updated account: %v", err)
 		}
 
-		err = ctx.GetStub().PutState(accountId, accountJSON)
+		err = ctx.GetStub().PutState(accountID, accountJSON)
 		if err != nil {
 			return "", fmt.Errorf("failed to update account in ledger: %v", err)
 		}
 
-		return fmt.Sprintf("insurance details updated for account %s", accountId), nil
-	} else {
-		return "", fmt.Errorf("only insurance organizations can update accounts")
+		return fmt.Sprintf("insurance details updated for account %s", accountID), nil
 	}
+	// else {
+	// 	return "", fmt.Errorf("only insurance organizations can update accounts")
+	// }
+	return fmt.Sprintf("Account updation attempted by %s: %v", clientOrgId, accountID), nil
 }

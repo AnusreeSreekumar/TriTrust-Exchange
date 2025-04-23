@@ -1,19 +1,22 @@
 fabric:
   cas:
-  - "ca1.bank.org.com"
-  - "ca1.insurance.org.com"
+    - "ca1.bank.fin.com"
+    - "ca1.insurance.fin.com"
   peers: 
-  - "peer1.bank.org.com"
-  #- "peer2.org0.auto.com"
-  - "peer1.insurance.org.com"
-   #- "peer2.insurance.org.com"
+    - "peer1.bank.fin.com"
+    - "peer1.insurance.fin.com"
   orderers:
-  - "orderer1.bank.com"
-  - "orderer2.insurance.com"
+    - "orderer1.fin.com"
+    - "orderer2.fin.com"
   settings:
     ca:
       FABRIC_LOGGING_SPEC: DEBUG
     peer:
       FABRIC_LOGGING_SPEC: DEBUG
     orderer:
-      FABRIC_LOGGING_SPEC: DEBUG
+      FABRIC_LOGGING_SPEC: DEBUG  
+  chaincodes:
+    - name: TrustChaincode
+      version: 1.0
+      language: go
+      endorsement_policy: "OR('bank.fin.com.peer')"
