@@ -1,15 +1,18 @@
 fabric:
   cas:
-  - "ca1.bank.org.com"
-  - "ca1.insurance.org.com"
+    - "ca1.bank.fin.com"         
+    - "ca1.insurance.fin.com"     
+    - "ca1.loanprovider.fin.com"  
+
   peers: 
-  - "peer1.bank.org.com"
-  #- "peer2.org0.auto.com"
-  - "peer1.insurance.org.com"
-   #- "peer2.insurance.org.com"
+    - "peer1.bank.fin.com"          
+    - "peer1.insurance.fin.com"    
+    - "peer1.loanprovider.fin.com"  
+
   orderers:
-  - "orderer1.bank.com"
-  - "orderer2.insurance.com"
+    - "orderer1.fin.com"            
+    - "orderer2.fin.com"           
+
   settings:
     ca:
       FABRIC_LOGGING_SPEC: DEBUG
