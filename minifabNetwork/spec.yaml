@@ -1,0 +1,24 @@
+channel: tritrustchannel
+
+fabric:
+  cas:
+    - "ca1.bank.fin.com"
+    - "ca1.insurance.fin.com"
+    - "ca1.loanprovider.fin.com"
+
+  peers:
+    - "peer1.bank.fin.com"
+    - "peer1.insurance.fin.com"
+    - "peer1.loanprovider.fin.com"
+
+  orderers:
+    - "orderer1.fin.com"
+    - "orderer2.fin.com"
+
+  settings:
+    ca:
+      FABRIC_LOGGING_SPEC: DEBUG
+    peer:
+      FABRIC_LOGGING_SPEC: DEBUG
+    orderer:
+      FABRIC_LOGGING_SPEC: DEBUG
