@@ -80,7 +80,11 @@ func (tc *TrustChaincode) CreateAccount(ctx contractapi.TransactionContextInterf
 		return "", err
 	}
 
+<<<<<<< HEAD
 	if clientOrgId == "bank-fin-com" {
+=======
+	if clientOrgId == "Org1MSP" {
+>>>>>>> 53f2682f8d391422205eedd979c70cd074bbb714
 
 		exists, err := tc.AccountExists(ctx, accountID)
 		if err != nil {
@@ -111,6 +115,12 @@ func (tc *TrustChaincode) CreateAccount(ctx contractapi.TransactionContextInterf
 			return fmt.Sprintf("successfully added account %v", accountID), nil
 		}
 	}
+<<<<<<< HEAD
+=======
+	// else {
+	// 	return "", fmt.Errorf("only banks can create accounts")
+	// }
+>>>>>>> 53f2682f8d391422205eedd979c70cd074bbb714
 	return fmt.Sprintf("Account creation attempted by %s: %v", clientOrgId, accountID), nil
 }
 
@@ -130,15 +140,21 @@ func (tc *TrustChaincode) ReadAccount(ctx contractapi.TransactionContextInterfac
 	return &account, nil
 }
 
+<<<<<<< HEAD
 // LOAN ORG:
 //***********
 
 func (tc *TrustChaincode) RequestLoan(ctx contractapi.TransactionContextInterface, applicationId string, accountID string, requestedAmount float64, employmentStatus string, payrollDocument string, cibilScore int) (string, error) {
+=======
+func (tc *TrustChaincode) UpdateAccount(ctx contractapi.TransactionContextInterface,
+	accountID string, address string, balance string, insuranceEligible bool, policyNumber string, coverageAmount float64, insuranceOrg string) (string, error) {
+>>>>>>> 53f2682f8d391422205eedd979c70cd074bbb714
 
 	clientOrgId, err := ctx.GetClientIdentity().GetMSPID()
 	if err != nil {
 		return "", err
 	}
+<<<<<<< HEAD
 
 	if clientOrgId == "loanprovider-fin-com" {
 
@@ -148,6 +164,13 @@ func (tc *TrustChaincode) RequestLoan(ctx contractapi.TransactionContextInterfac
 		}
 		if accountJSON == nil {
 			return "", fmt.Errorf("bank account with ID %s does not exist", accountID)
+=======
+	if clientOrgId == "Org2MSP" {
+
+		account, err := tc.ReadAccount(ctx, accountID)
+		if err != nil {
+			return "", fmt.Errorf("failed to read account %s: %v", accountID, err)
+>>>>>>> 53f2682f8d391422205eedd979c70cd074bbb714
 		}
 
 		loan := LoanAccount{
@@ -258,6 +281,7 @@ func (tc *TrustChaincode) ProcessLoanApplication(ctx contractapi.TransactionCont
 		if err != nil {
 			return "", fmt.Errorf("failed to marshal updated account: %v", err)
 		}
+<<<<<<< HEAD
 		if err := ctx.GetStub().PutState(account.AccountID, updatedAccountJSON); err != nil {
 			return "", fmt.Errorf("failed to update account: %v", err)
 		}
@@ -603,4 +627,18 @@ func (tc *TrustChaincode) ReadInsuranceApplication(ctx contractapi.TransactionCo
 	}
 
 	return &application, nil
+=======
+
+		err = ctx.GetStub().PutState(accountID, accountJSON)
+		if err != nil {
+			return "", fmt.Errorf("failed to update account in ledger: %v", err)
+		}
+
+		return fmt.Sprintf("insurance details updated for account %s", accountID), nil
+	}
+	// else {
+	// 	return "", fmt.Errorf("only insurance organizations can update accounts")
+	// }
+	return fmt.Sprintf("Account updation attempted by %s: %v", clientOrgId, accountID), nil
+>>>>>>> 53f2682f8d391422205eedd979c70cd074bbb714
 }
