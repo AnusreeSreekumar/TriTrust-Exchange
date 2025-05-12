@@ -1,8 +1,8 @@
-  ##### TRITRUST Exchange
+ ##### TRITRUST Exchange
 
-
-
-
+ <p align="center" style="font-size: 18px; color: #FF69B4;">
+  <em>"A permissioned blockchain network built using Hyperledger Fabric that enables decentralized, secure, transparent, and verifiable interactions between three financial entities BankOrg, LoanproviderOrg and InsuranceOrg"</em>
+</p>
 
 
 <div align="center">
@@ -18,9 +18,6 @@
 
 ## 🌟 Project Overview
 
-<p align="center" style="font-size: 18px; color: #FF69B4;">
-  <em>"A permissioned blockchain network built using Hyperledger Fabric that enables decentralized, secure, transparent, and verifiable interactions between three financial entities BankOrg, LoanproviderOrg and InsuranceOrg"</em>
-</p>
 
 <div style="background: linear-gradient(145deg, #1a1a1a, #2a2a2a); padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(255,0,127,0.2);">
   
@@ -67,7 +64,7 @@
 - Go 1.23
 
 
-Installation
+## Installation
 
 # Clone Repository
 git clone https://github.com/AnusreeSreekumar/tritrust_exchange.git
